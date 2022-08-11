@@ -15,13 +15,24 @@ const login = (e) => {
     userName = userNameInput.value;
     loginForm.classList.remove('show');
     messagesSection.classList.add('show');
+    console.log(userName);
   } else {
     alert('Error, enter your user name');
   };
 };
 
-console.log(userName);
+const sendMessage = (e) => {
+  e.preventDefault();
+  if (messageContentInput !== '') {
+    addMessage(userName, messageContentInput.value);
+    messageContentInput.value = '';
+  } else {
+    alert('Error, enter your message')
+  };
+};
 
 
 
+
+addMessageForm.addEventListener('submit', (e) => sendMessage(e));
 loginForm.addEventListener('submit', (e) => login(e));
