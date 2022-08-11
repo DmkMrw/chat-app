@@ -23,7 +23,7 @@ const login = (e) => {
 
 const sendMessage = (e) => {
   e.preventDefault();
-  if (messageContentInput !== '') {
+  if (messageContentInput.value !== '') {
     addMessage(userName, messageContentInput.value);
     messageContentInput.value = '';
   } else {
