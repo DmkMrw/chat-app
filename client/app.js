@@ -6,16 +6,17 @@ const userNameInput = document.getElementById('username');
 const messageContentInput = document.getElementById('message-content');
 let userName = '';
 
-console.log(userNameInput);
+const socket = io();
+socket.on('message', (event) => addMessage(event.author, event.content))
+
 
 const login = (e) => {
   e.preventDefault();
-  console.log('test');
   if (userNameInput.value !== '') {
     userName = userNameInput.value;
+    socket.emit('user', userName);
     loginForm.classList.remove('show');
     messagesSection.classList.add('show');
-    console.log(userName);
   } else {
     alert('Error, enter your user name');
   };
@@ -23,15 +24,19 @@ const login = (e) => {
 
 const sendMessage = (e) => {
   e.preventDefault();
+
+  let messageContent = messageContentInput.value;
+
   if (messageContentInput.value !== '') {
     addMessage(userName, messageContentInput.value);
+    socket.emit('message', { author: userName, content: messageContent });
     messageContentInput.value = '';
   } else {
     alert('Error, enter your message')
   };
 };
 
-const addMessage = (author, content) => {
+function addMessage(author, content) {
   const message = document.createElement('li');
   message.classList.add('message');
   message.classList.add('message--received');

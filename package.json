@@ -6,12 +6,13 @@
   "author": "Dominik Mrówka <dmrowka7@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "socket.io": "2.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "start" : "nodemon server.js"
+    "start": "nodemon server.js"
   }
 }
