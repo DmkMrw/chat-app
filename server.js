@@ -34,15 +34,12 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('message', {author: 'Chat Bot', content: `<i>${userName} has joined the conversation!`});
   })
 
-
   socket.on('disconnect', () => {
     console.log('Oh, socket ' + socket.id + ' has left');
     const index = users.findIndex(user => user.id === socket.id);
-    console.log('index', index);
-    const user = users.find((user) => user.id === socket.id);
+    (users.length > 0) && socket.broadcast.emit('message', { author: 'Chat Bot', content: `<i>${users[index].name} has left the conversation!` });
     users.splice(index, 1);
     console.log('USERS', users);
-    (users.length > 0) && socket.broadcast.emit('message', {author: 'Chat Bot', content: `<i>${user.name} has left the conversation!`});
   });
 
 });
